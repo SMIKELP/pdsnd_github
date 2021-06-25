@@ -65,16 +65,16 @@ def load_data(city, month, day):
     df['Start Time'] = pd.to_datetime(df['Start Time'])
     df['month'] = df['Start Time'].dt.month
     df['day of week'] = df['Start Time'].dt.weekday_name
-    
+
     if month != 'all':
         months = ['january', 'february', 'march', 'april', 'may', 'june']
         month = months.index(month) + 1
-    
+
     df = df[df['month'] == month]
-    
+
     if day != 'all':
         df = df[df['day of week'] == day.title()]
-    
+
 
 
 
@@ -138,7 +138,7 @@ def station_stats(df):
     # TO DO: display most frequent combination of start station and end station trip
     common_start_end = df.groupby(['Start Station','End Station']).count().idxmax()[0]
     print('Most Frequent Combination Of Start End End Stations: ', common_start_end)
-    
+
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
 
@@ -154,23 +154,24 @@ def trip_duration_stats(df):
     #total_travel_time_formatted = time.strftime("%d:%H:%M:%S",time.gmtime(total_travel_time_seconds))
     print('Total Travel Time (in seconds): ', total_travel_time_seconds)
     #print('Total Travel Time (formatted): ', total_travel_time_formatted)
-    
+
     total_travel_time_hours = sum(df['Trip Duration'])/3600
     print('Total Travel Time (in hours): ', total_travel_time_hours)
-    
+
     total_travel_time_days = sum(df['Trip Duration'])/86400
     print('Total Travel Time (in days): ', total_travel_time_days,'\n')
 
     # TO DO: display mean travel time
-    
+
     mean_travel_time_seconds = df['Trip Duration'].mean()
     mean_travel_time_formatted = time.strftime("%H:%M:%S",time.gmtime(mean_travel_time_seconds))
+    #decided to format the travel time to make it easier for users to read
     print('Average Travel Time (in seconds): ', mean_travel_time_seconds)
     print('Average Travel Time (formatted): ', mean_travel_time_formatted)
-    
+
     mean_travel_time_hours = (df['Trip Duration'].mean())/3600
     print('Average Travel Time (in hours): ', mean_travel_time_hours)
-    
+
     mean_travel_time_days = (df['Trip Duration'].mean())/86400
     print('Average Travel Time (in days): ', mean_travel_time_days)
 
