@@ -166,6 +166,7 @@ def trip_duration_stats(df):
 
     mean_travel_time_seconds = df['Trip Duration'].mean()
     mean_travel_time_formatted = time.strftime("%H:%M:%S",time.gmtime(mean_travel_time_seconds))
+    #decided to format the travel time to make it easier for users to read
     print('Average Travel Time (in seconds): ', mean_travel_time_seconds)
     print('Average Travel Time (formatted): ', mean_travel_time_formatted)
 
